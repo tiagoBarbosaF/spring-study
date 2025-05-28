@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: module-fundamentals
+
+server:
+  port: 8081
