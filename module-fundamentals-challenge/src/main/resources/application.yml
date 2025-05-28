@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: module-fundamentals-challenge
+  config:
+    import: optional:file:/Users/tiagobarbosa/dev/java/spring-study/config/shared-application.yml
+
+server:
+  port: 8082
