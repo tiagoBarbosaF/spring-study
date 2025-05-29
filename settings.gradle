@@ -2,3 +2,4 @@ rootProject.name = 'spring-study'
 
 include 'module-fundamentals'
 include 'module-fundamentals-challenge'
+include 'module2-apis'
