@@ -9,7 +9,6 @@ import java.util.UUID;
 @Table(name = "customer")
 public class CustomerEntity {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
     private String name;
     private String email;

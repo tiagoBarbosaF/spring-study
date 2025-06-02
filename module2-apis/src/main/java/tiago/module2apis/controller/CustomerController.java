@@ -32,8 +32,8 @@ public class CustomerController {
     }
 
     @GetMapping("/customers")
-    public ResponseEntity<Page<CustomerResponse>> getClient(@RequestParam(defaultValue = "0") int page,
-                                                            @RequestParam(defaultValue = "10") int pageSize) {
+    public ResponseEntity<Page<CustomerResponse>> getAllClient(@RequestParam(defaultValue = "0") int page,
+                                                               @RequestParam(defaultValue = "10") int pageSize) {
         Page<CustomerResponse> response = customerService.getAllClients(page, pageSize);
         return response != null ? ResponseEntity.ok(response) : ResponseEntity.notFound().build();
     }
@@ -42,5 +42,18 @@ public class CustomerController {
     public ResponseEntity<CustomerResponse> getCustomerById(@RequestParam UUID id) {
         CustomerResponse response = customerService.getCustomer(id);
         return response != null ? ResponseEntity.ok(response) : ResponseEntity.notFound().build();
+    }
+
+    @PutMapping
+    public ResponseEntity<MessageResponse> updateCustomer(@RequestBody @Valid CustomerRequest request,
+                                                          @RequestParam UUID id) {
+        MessageResponse response = customerService.updateCustomer(id, request);
+        return response != null ? ResponseEntity.noContent().build() : ResponseEntity.badRequest().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteCustomer(@RequestParam UUID id) {
+        customerService.deleteCustomer(id);
+        return ResponseEntity.noContent().build();
     }
 }

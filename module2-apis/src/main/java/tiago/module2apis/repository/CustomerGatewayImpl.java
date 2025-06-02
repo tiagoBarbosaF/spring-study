@@ -30,9 +30,22 @@ public class CustomerGatewayImpl implements CustomerGateway {
     }
 
     @Override
+    public void updateCustomer(Customer customer) {
+        CustomerEntity entity = CustomerMapper.modelToEntity(customer);
+        customerRepository.save(entity);
+    }
+
+    @Override
     public Customer findCustomerById(UUID id) {
         return customerRepository.findById(id)
                 .map(CustomerMapper::entityToModel)
                 .orElseThrow(() -> new CustomerException("Customer not found"));
     }
+
+    @Override
+    public void deleteCustomerById(UUID id) {
+        customerRepository.deleteById(id);
+    }
+
+
 }

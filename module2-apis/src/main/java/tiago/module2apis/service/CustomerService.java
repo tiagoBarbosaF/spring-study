@@ -35,4 +35,24 @@ public class CustomerService {
         Customer customer = customerGateway.findCustomerById(id);
         return CustomerServiceMapper.modelToResponse(customer);
     }
+
+    @Transactional
+    public MessageResponse updateCustomer(UUID id, CustomerRequest request) {
+        Customer customerToUpdate = customerGateway.findCustomerById(id);
+        Customer customerUpdated = Customer.builder()
+                .id(customerToUpdate.getId())
+                .name(request.name())
+                .email(request.email())
+                .age(request.age())
+                .createdAt(customerToUpdate.getCreatedAt())
+                .build();
+        customerGateway.updateCustomer(customerUpdated);
+
+        return new MessageResponse("Customer updated");
+    }
+    
+    @Transactional
+    public void deleteCustomer(UUID id) {
+        customerGateway.deleteCustomerById(id);
+    }
 }
